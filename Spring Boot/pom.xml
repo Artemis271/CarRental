@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.coderdot</groupId>
-	<artifactId>rent-a-car-spring</artifactId>
+	<artifactId>Spring Boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>rent-a-car-spring</name>
 	<description>Demo project for Spring Boot</description>
