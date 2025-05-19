@@ -1,63 +1,56 @@
-.child {
-  padding: 20px;
+/* Card Styles */
+.child, .row {
   width: 780px;
-  background-color: white;
   background: white;
-  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
 }
 
 .row {
   padding: 30px;
-  width: 780px;
-  background-color: white;
-  background: white;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 20px;
+  box-shadow: none;
 }
 
+/* Table Styles */
+tr {
+  padding: 5px 0;
+  margin-bottom: 0;
+}
+
+/* Typography */
+p {
+  margin-bottom: 0;
+}
+
+h2:hover {
+  text-decoration: underline;
+}
+
+hr {
+  margin: 10px 0;
+}
+
+/* Icons */
 i {
   font-size: 20px;
   font-weight: bold;
 }
 
+/* Utility Classes */
 .vertical-center {
-  margin: 0;
   position: absolute;
   top: 50%;
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  margin: 0;
 }
 
-tr {
-  padding: 5px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-}
-
-p {
-  margin-bottom: 0em;
-}
-
-hr {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-h2:hover {
-  text-decoration-line: underline;
-}
-
+/* Pagination */
 .pagination {
   width: 780px;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 20px auto 0;
   padding-bottom: 20px;
-  margin-top: 20px;
+  border-radius: 5px;
 }
