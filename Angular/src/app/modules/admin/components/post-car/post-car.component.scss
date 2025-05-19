@@ -1,20 +1,23 @@
+/* Layout Styles */
 .parent {
-  width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  min-height: 100vh;
 }
 
+/* Card Container */
 .child {
-  padding: 50px;
   width: 100%;
   max-width: 680px;
+  padding: 50px;
   background-color: white;
-  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
 }
 
+/* Profile Image Section */
 .imgDiv {
   width: 100%;
   text-align: center;
@@ -28,13 +31,14 @@
 }
 
 .profile {
-  height: 180px;
   width: 180px;
+  height: 180px;
   margin-bottom: 5px;
-  object-fit: cover;
   border-radius: 50%;
+  object-fit: cover;
 }
 
+/* Upload Components */
 .upload-label {
   cursor: pointer;
 }
@@ -45,7 +49,8 @@
   margin-top: 10px;
 }
 
+/* Form Button */
 .login-form-button {
-  margin-top: 20px;
   width: 100%;
+  margin-top: 20px;
 }
