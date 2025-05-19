@@ -1,75 +1,45 @@
+/* Layout Styles */
+.ant-layout.dashboard-layout {
+  min-height: calc(100vh - 115px);
+}
+
+.sider-content-wrapper.ant-layout-content {
+  max-height: calc(100vh - 115px);
+  overflow-y: auto;
+}
+
+.inner-content {
+  padding: 32px;
+  padding-bottom: 60px;
+  background-color: #F8F8F8;
+  min-height: 91vh;
+}
+
+/* Card & Container Styles */
+.child, .row {
+  width: 780px;
+  background: white;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+
 .child {
   padding: 20px;
-  width: 780px;
-  background-color: white;
-  background: white;
   box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  // padding-bottom: 10px;
-
 }
 
 .row {
   padding: 30px;
-  width: 780px;
-  background-color: white;
+  margin-top: 20px;
+}
+
+/* Filter Components */
+.filter-grid {
   background: white;
-  // box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-
-}
-
-i {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-tr {
-  padding: 5px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-}
-
-p {
-  margin-bottom: 0em;
-}
-
-hr {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-h2:hover {
-  text-decoration-line: underline;
-}
-
-.pagination {
-  width: 780px;
-
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 20px;
-  margin-top: 20px;
-
-}
-
-.ant-layout.dashboard-layout {
-  min-height: calc(100vh - 115px);
+  padding: 25px;
+  margin-bottom: 22px;
 }
 
 .firstFilterInput {
@@ -79,29 +49,7 @@ h2:hover {
 .filterBtn {
   width: 207px;
   background-color: black;
-  float: right !important;
-}
-
-.inner-content {
-  padding: 32px;
-  background-color: #F8F8F8;
-  padding-bottom: 60px;
-  min-height: 91vh;
-}
-
-.sider-content-wrapper.ant-layout-content {
-  max-height: calc(100vh - 115px);
-  overflow-y: auto;
-}
-
-
-.filter-grid {
-  //   background: #fcfcfc;
-  background: white;
-  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  padding: 25px;
-  margin-bottom: 22px;
+  float: right;
 }
 
 .filters-category-flex {
@@ -125,21 +73,11 @@ h2:hover {
     border-radius: 40px;
     min-width: 111px;
     height: 30px;
-    padding: 5px;
-    padding-right: 0px;
-    margin: 0px 10px 10px 0px;
+    padding: 5px 0 5px 5px;
+    margin: 0 10px 10px 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-  }
-
-  p {
-    margin-top: 10px;
-    padding: 10px;
-  }
-
-  i {
-    font-size: 10px;
   }
 
   .ant-btn-circle {
@@ -147,43 +85,33 @@ h2:hover {
     height: 30px;
     background: #141a33;
     border: 18px solid #141a33;
-    padding: 0px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 }
 
-
+/* Form Elements */
 ::ng-deep {
-
-
-
-  .expand-actions-grid {
-    .ant-btn-primary {
-      background: #ffffff;
-      border: 0.5px solid #141a33;
-      border-radius: 3px;
-      min-width: 100px;
-      height: 25px;
-      font-weight: 500;
-      font-size: 10px;
-      color: #ff7800;
-    }
+  .expand-actions-grid .ant-btn-primary {
+    background: #ffffff;
+    border: 0.5px solid #141a33;
+    border-radius: 3px;
+    min-width: 100px;
+    height: 25px;
+    font-weight: 500;
+    font-size: 10px;
+    color: #ff7800;
   }
-
-
-
-
 
   .filter-fields-width {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    // margin-bottom: 21px;
 
     &:last-child {
-      margin-bottom: 0px;
+      margin-bottom: 0;
     }
 
     .d-flex {
@@ -198,68 +126,39 @@ h2:hover {
     }
 
     p {
-      margin: 0px;
+      margin: 0;
       font-weight: 300;
       font-size: 14px;
       color: #141a33;
-
-
     }
 
     .ant-select {
       margin-right: 10px;
       width: 25%;
       min-width: 260px;
-
-    }
-
-
-
-
-    .ant-select-arrow {
-      margin-top: -8px !important;
     }
 
     .ant-input {
       width: 27%;
-      //   height: 40px;
       margin-right: 10px;
       border-radius: 3px;
       color: rgba(45, 45, 45, 0.6);
       font-size: 14px;
-
-
-
-
     }
-
 
     .ant-btn-circle {
       background-color: transparent;
-      border: 0px;
+      border: 0;
       box-shadow: none;
     }
-
-
-  }
-
-}
-
-.level {
-  width: auto;
-  background-color: #001529;
-
-  h5 {
-    color: white;
-    padding: 5px;
   }
 }
 
+/* Doctor Profile Styles */
 .docDp {
   height: 130px;
   width: 130px;
   float: left;
-
 
   img {
     height: 130px;
@@ -267,13 +166,6 @@ h2:hover {
     border-radius: 50%;
     border: 5px solid #001529;
   }
-}
-
-.d-flex {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1;
 }
 
 .docInfo {
@@ -284,17 +176,24 @@ h2:hover {
   }
 }
 
-.color-gray {
-  div {
-    h5 {
-      color: gray;
-      margin-top: -5px;
-    }
-  }
+.color-gray div h5 {
+  color: gray;
+  margin-top: -5px;
 }
 
 .docDes {
   margin-top: 10px;
+}
+
+/* UI Components */
+.level {
+  width: auto;
+  background-color: #001529;
+
+  h5 {
+    color: white;
+    padding: 5px;
+  }
 }
 
 .outline-button {
@@ -308,6 +207,54 @@ h2:hover {
   background-color: transparent;
 }
 
+/* Utility Classes */
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+/* Typography */
 span {
   color: gray;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+h2:hover {
+  text-decoration: underline;
+}
+
+i {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Table Styles */
+tr {
+  padding: 5px 0;
+  margin-bottom: 0;
+}
+
+/* Divider */
+hr {
+  margin: 10px 0;
+}
+
+/* Pagination */
+.pagination {
+  width: 780px;
+  margin: 20px auto 0;
+  padding-bottom: 20px;
+  border-radius: 5px;
 }
