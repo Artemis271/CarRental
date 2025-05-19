@@ -1,13 +1,28 @@
+/* Layout Container */
+.parent {
+  position: relative;
+  width: 100%;
+  height: 91vh;
+}
+
+/* Form Container */
+.child {
+  position: absolute;
+  width: 380px;
+  padding: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
+}
+
+/* Form Elements */
 .login-form {
   max-width: 300px;
 }
-
-.imgDiv {
-  width: 100%;
-  vertical-align: middle;
-  margin-bottom: 40px;
-}
-
 
 .login-form-margin {
   margin-bottom: 26px;
@@ -21,26 +36,14 @@
   width: 100%;
 }
 
-.child {
-  padding: 50px;
-  position: absolute;
-  width: 380px;
-  background-color: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  margin-bottom: 32px;
-}
-
-.parent {
+/* Image Container */
+.imgDiv {
   width: 100%;
-  height: 91vh;
-  position: relative;
+  margin-bottom: 40px;
+  vertical-align: middle;
 }
 
+/* Button Styles */
 button {
   background-color: #001529;
   border: none;

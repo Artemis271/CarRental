@@ -1,9 +1,302 @@
 openapi: 3.1.0
 info:
-  title: Title
-  description: Title`
+  title: Car Rental API
+  description: API для администрирования, аутентификации и управления бронированиями автомобилей.
   version: 1.0.0
 servers:
-  - url: 'https'
+  - url: http://localhost:8080
+
+
 paths:
-  
+
+  /api/admin/car:
+    post:
+      summary: Добавить автомобиль
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CarDto'
+      responses:
+        '201':
+          description: Автомобиль успешно добавлен
+        '400':
+          description: Ошибка в запросе
+
+  /api/admin/cars:
+    get:
+      summary: Получить список всех автомобилей
+      responses:
+        '200':
+          description: Список автомобилей
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarDto'
+
+  /api/admin/car/{carId}:
+    get:
+      summary: Получить автомобиль по ID
+      parameters:
+        - in: path
+          name: carId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Детали автомобиля
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarDto'
+        '404':
+          description: Автомобиль не найден
+    delete:
+      summary: Удалить автомобиль
+      parameters:
+        - in: path
+          name: carId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Успешно удалено
+    put:
+      summary: Обновить автомобиль
+      parameters:
+        - in: path
+          name: carId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CarDto'
+      responses:
+        '200':
+          description: Обновлено
+        '400':
+          description: Ошибка
+        '404':
+          description: Автомобиль не найден
+
+  /api/admin/car/bookings:
+    get:
+      summary: Получить список всех бронирований
+      responses:
+        '200':
+          description: Список бронирований
+
+  /api/admin/car/booking/{bookingId}/{status}:
+    get:
+      summary: Изменить статус бронирования
+      parameters:
+        - in: path
+          name: bookingId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: status
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Статус изменён
+        '404':
+          description: Бронирование не найдено
+
+  /api/admin/car/search:
+    post:
+      summary: Поиск автомобилей (админ)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCarDto'
+      responses:
+        '200':
+          description: Результаты поиска
+
+  /api/auth/signup:
+    post:
+      summary: Регистрация пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+      responses:
+        '201':
+          description: Успешная регистрация
+        '406':
+          description: Email уже существует
+        '400':
+          description: Неверный формат данных
+
+  /api/auth/login:
+    post:
+      summary: Аутентификация пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticationRequest'
+      responses:
+        '200':
+          description: Успешная аутентификация
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationResponse'
+        '401':
+          description: Неверный логин или пароль
+
+  /api/customer/cars:
+    get:
+      summary: Получить все автомобили (для клиента)
+      responses:
+        '200':
+          description: Список автомобилей
+
+  /api/customer/car/{carId}:
+    get:
+      summary: Получить авто по ID (для клиента)
+      parameters:
+        - in: path
+          name: carId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Детали автомобиля
+        '404':
+          description: Не найдено
+
+  /api/customer/car/book/{carId}:
+    post:
+      summary: Забронировать автомобиль
+      parameters:
+        - in: path
+          name: carId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookACarDto'
+      responses:
+        '200':
+          description: Бронирование успешно
+        '400':
+          description: Ошибка бронирования
+
+  /api/customer/car/bookings/{userId}:
+    get:
+      summary: Получить бронирования по ID пользователя
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Список бронирований
+
+  /api/customer/car/search:
+    post:
+      summary: Поиск автомобилей (клиент)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCarDto'
+      responses:
+        '200':
+          description: Результаты поиска
+
+components:
+  schemas:
+    CarDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        brand:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+        image:
+          type: string
+          format: binary
+        # и другие поля, если есть
+
+    SearchCarDto:
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        yearFrom:
+          type: integer
+        yearTo:
+          type: integer
+
+    SignupRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+
+    AuthenticationRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    AuthenticationResponse:
+      type: object
+      properties:
+        jwt:
+          type: string
+        userId:
+          type: integer
+        userRole:
+          type: string
+
+    BookACarDto:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
