@@ -1,37 +1,40 @@
-[nz-form] {
-  max-width: 600px;
+/* Layout Styles */
+.parent {
+  width: 100%;
+  height: 91vh;
+  position: relative;
 }
 
-.phone-select {
-  width: 70px;
-}
-
-.register-are {
-  margin-bottom: 8px;
-}
-
+/* Form Container */
 .child {
-  padding: 50px;
   position: absolute;
   width: 380px;
+  padding: 50px;
   background-color: white;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  box-shadow: 1px 1px 15px -7px rgba(0, 0, 0, 0.1);
   margin-bottom: 22px;
+}
 
+/* Form Elements */
+[nz-form] {
+  max-width: 600px;
 }
 
 nz-form-control {
   min-width: 280px;
 }
 
-.parent {
-  width: 100%;
-  height: 91vh;
-  position: relative;
+.phone-select {
+  width: 70px;
+}
+
+/* Form Sections */
+.register-are {
+  margin-bottom: 8px;
 }
 
 .login-form-margin {
@@ -42,6 +45,7 @@ nz-form-control {
   float: right;
 }
 
+/* Buttons */
 .login-form-button {
   width: 100%;
 }
@@ -51,8 +55,9 @@ button {
   border: none;
 }
 
+/* Image Container */
 .imgDiv {
   width: 100%;
-  vertical-align: middle;
   margin-bottom: 40px;
+  vertical-align: middle;
 }
