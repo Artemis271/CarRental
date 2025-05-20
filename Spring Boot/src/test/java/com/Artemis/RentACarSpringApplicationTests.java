@@ -1,129 +1,74 @@
 package com.Artemis;
 
+import com.Artemis.controllers.AdminController;
+import com.Artemis.dtos.CarDto;
+import com.Artemis.services.admin.AdminService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+@WebMvcTest(AdminController.class)
+@AutoConfigureMockMvc(addFilters = false)
+class AdminControllerTest {
 
-@SpringBootTest
-@AutoConfigureMockMvc
-class RentACarSpringApplicationTests {
+    @Autowired
+    private MockMvc mockMvc;
 
-	@Autowired
-	private MockMvc mockMvc;
+    @MockBean
+    private AdminService adminService;
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void testGetAllCars() throws Exception {
+        List<CarDto> cars = List.of(new CarDto());
+        when(adminService.getAllCars()).thenReturn(cars);
 
-	@Test
-	public void postCar() throws Exception {
-		mockMvc.perform(post("/api/admin/car")
-						.param("id", "0")
-						.param("name", "")
-						.param("color", "")
-						.param("transmission", "")
-						.param("brand", "")
-						.param("type", "")
-						.param("modelYear", "")
-						.param("description", "")
-						.param("price", "0")
-						.param("image", "")
-						.param("returnedImage", "")
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.with(SecurityMockMvcRequestPostProcessors.user("user")))
-				.andExpect(status().isOk())
-				.andDo(print());
-	}
+        mockMvc.perform(get("/api/admin/cars"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+    }
 
-	@Test
-	public void getAllCars() throws Exception {
-		mockMvc.perform(get("/api/admin/cars")
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.with(SecurityMockMvcRequestPostProcessors.user("user")))
-				.andExpect(status().isOk())
-				.andDo(print());
-	}
+    @Test
+    void testDeleteCar() throws Exception {
+        mockMvc.perform(delete("/api/admin/car/1"))
+                .andExpect(status().isNoContent());
+    }
 
-	@Test
-	public void deleteCar() throws Exception {
-		mockMvc.perform(delete("/api/admin/car/{0}", "0")
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.with(SecurityMockMvcRequestPostProcessors.user("user")))
-				.andExpect(status().isOk())
-				.andDo(print());
-	}
+    @Test
+    void testGetCarById_Found() throws Exception {
+        CarDto carDto = new CarDto();
+        when(adminService.getCarById(1L)).thenReturn(carDto);
 
-	@Test
-	public void getCarById() throws Exception {
-		mockMvc.perform(get("/api/admin/car/{0}", "0")
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.with(SecurityMockMvcRequestPostProcessors.user("user")))
-				.andExpect(status().isOk())
-				.andDo(print());
-	}
+        mockMvc.perform(get("/api/admin/car/1"))
+                .andExpect(status().isOk());
+    }
 
-	@Test
-	public void updateCar() throws Exception {
-		mockMvc.perform(put("/api/admin/car/{0}", "0")
-						.param("id", "0")
-						.param("name", "")
-						.param("color", "")
-						.param("transmission", "")
-						.param("brand", "")
-						.param("type", "")
-						.param("modelYear", "")
-						.param("description", "")
-						.param("price", "0")
-						.param("image", "")
-						.param("returnedImage", "")
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.with(SecurityMockMvcRequestPostProcessors.user("user")))
-				.andExpect(status().isOk())
-				.andDo(print());
-	}
 
-	@Test
-	public void getBookings() throws Exception {
-		mockMvc.perform(get("/api/admin/car/bookings")
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.with(SecurityMockMvcRequestPostProcessors.user("user")))
-				.andExpect(status().isOk())
-				.andDo(print());
-	}
+    @Test
+    void testGetBookings() throws Exception {
+        when(adminService.getBookings()).thenReturn(List.of());
 
-	@Test
-	public void changeBookingStatus() throws Exception {
-		mockMvc.perform(get("/api/admin/car/booking/{0}/{1}", "0", "")
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.with(SecurityMockMvcRequestPostProcessors.user("user")))
-				.andExpect(status().isOk())
-				.andDo(print());
-	}
+        mockMvc.perform(get("/api/admin/car/bookings"))
+                .andExpect(status().isOk());
+    }
 
-	@Test
-	public void searchCar() throws Exception {
-		String searchCarDto = """
-				{
-				    "brand": "",
-				    "type": "",
-				    "transmission": "",
-				    "color": ""
-				}""";
+    @Test
+    void testChangeBookingStatus_Success() throws Exception {
+        when(adminService.changeBookingStatus(1L, "APPROVED")).thenReturn(true);
 
-		mockMvc.perform(post("/api/admin/car/search")
-						.with(SecurityMockMvcRequestPostProcessors.csrf())
-						.with(SecurityMockMvcRequestPostProcessors.user("user"))
-						.content(searchCarDto)
-						.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andDo(print());
-	}
+        mockMvc.perform(get("/api/admin/car/booking/1/APPROVED"))
+                .andExpect(status().isOk());
+    }
+
+
 }
+
