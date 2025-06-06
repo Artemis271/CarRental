@@ -30,5 +30,15 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_DATABASE: car_rental_db
+
+  frontend:
+    build:
+      context: ../Angular
+      dockerfile: Dockerfile
+    image: angular-frontend:latest
+    ports:
+      - "4200:4200"
+
+
 volumes:
   mysql_data:
